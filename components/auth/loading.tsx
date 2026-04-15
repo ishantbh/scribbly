@@ -9,6 +9,7 @@ export function Loading() {
           alt='Scribbly Logo'
           width={80}
           height={80}
+          loading='eager'
           className='w-full animate-pulse'
         />
       </div>
