@@ -4,6 +4,8 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { TooltipProvider } from '@/components/ui/tooltip'
+import { ClerkProvider } from '@clerk/nextjs'
+import ConvexClientProvider from '@/providers/convex-client-provider'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -31,14 +33,16 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className='min-h-full flex flex-col'>
+      <body className='min-h-full h-full flex flex-col'>
         <ThemeProvider
           attribute='class'
           defaultTheme='system'
           enableSystem
           disableTransitionOnChange
         >
-          <TooltipProvider>{children}</TooltipProvider>
+          <TooltipProvider>
+            <ConvexClientProvider>{children}</ConvexClientProvider>
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>
