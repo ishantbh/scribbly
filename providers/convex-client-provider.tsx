@@ -3,6 +3,7 @@
 import { ClerkProvider, useAuth } from '@clerk/nextjs'
 import { ConvexProviderWithClerk } from 'convex/react-clerk'
 import { Authenticated, AuthLoading, ConvexReactClient } from 'convex/react'
+import { Loading } from '@/components/auth/loading'
 
 if (!process.env.NEXT_PUBLIC_CONVEX_URL) {
   throw new Error('Missing NEXT_PUBLIC_CONVEX_URL in your .env file')
@@ -19,7 +20,7 @@ export default function ConvexClientProvider({
     <ClerkProvider>
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
         <AuthLoading>
-          <div>Loading...</div>
+          <Loading />
         </AuthLoading>
 
         <Authenticated>{children}</Authenticated>
