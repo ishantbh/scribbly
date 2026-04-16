@@ -1,3 +1,5 @@
+import { UserButton } from '@clerk/nextjs'
+
 import { DashboardSidebar } from './_components/dashboard-sidebar'
 import { Separator } from '@/components/ui/separator'
 import {
@@ -12,18 +14,26 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <SidebarProvider>
+    <SidebarProvider
+      style={
+        {
+          '--sidebar-width': '350px',
+        } as React.CSSProperties
+      }
+    >
       <DashboardSidebar />
 
       <SidebarInset>
-        <header className='flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12'>
-          <div className='flex items-center justify-center gap-2 px-4'>
-            <SidebarTrigger className='-ml-1' />
-            <Separator
-              orientation='vertical'
-              className='mr-2 data-[orientation=vertical]:h-4 my-auto'
-            />
-          </div>
+        <header className='sticky top-0 flex shrink-0 items-center gap-2 border-b bg-background p-4'>
+          <SidebarTrigger className='-ml-1' />
+          <Separator
+            orientation='vertical'
+            className='mr-2 data-[orientation=vertical]:h-4'
+          />
+
+          <div className='flex-1'>Search</div>
+
+          <UserButton />
         </header>
 
         {children}
