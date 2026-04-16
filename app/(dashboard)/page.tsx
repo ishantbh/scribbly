@@ -1,14 +1,12 @@
-import { UserButton } from '@clerk/nextjs'
-
 export default function Home() {
   return (
-    <div className='flex flex-1 flex-col gap-4 p-4 pt-0'>
-      <UserButton />
-      <div className='grid auto-rows-min gap-4 md:grid-cols-3'>
-        {Array.from({ length: 3 }).map((_, i) => (
-          <div key={i} className='aspect-video rounded-xl bg-muted/50' />
-        ))}
-      </div>
+    <div className='flex flex-1 flex-col gap-4 p-4'>
+      {Array.from({ length: 24 }).map((_, index) => (
+        <div
+          key={index}
+          className='aspect-video h-12 w-full rounded-lg bg-muted/50'
+        />
+      ))}
     </div>
   )
 }
