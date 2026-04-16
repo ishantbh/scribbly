@@ -1,7 +1,11 @@
 'use client'
 
 import Image from 'next/image'
-import { useOrganization, useOrganizationList } from '@clerk/nextjs'
+import {
+  CreateOrganization,
+  useOrganization,
+  useOrganizationList,
+} from '@clerk/nextjs'
 import { PlusIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
@@ -14,6 +18,13 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 
 export function PrimaryDashboardSidebar() {
   const { organization: activeOrg } = useOrganization()
@@ -65,17 +76,29 @@ export function PrimaryDashboardSidebar() {
               })}
 
               <SidebarMenuItem>
-                {/* TODO: Add logic to create org */}
-                <SidebarMenuButton
-                  tooltip={{
-                    children: 'Create organization',
-                    hidden: false,
-                  }}
-                  className='px-2.5 md:px-2 bg-white/10'
-                >
-                  <PlusIcon />
-                  <span>Create organization</span>
-                </SidebarMenuButton>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <SidebarMenuButton
+                      tooltip={{
+                        children: 'Create organization',
+                        hidden: false,
+                      }}
+                      className='px-2.5 md:px-2 bg-white/10'
+                    >
+                      <PlusIcon />
+                      <span>Create organization</span>
+                    </SidebarMenuButton>
+                  </DialogTrigger>
+                  <DialogContent
+                    showCloseButton={false}
+                    className='p-0 max-w-fit sm:max-w-fit'
+                  >
+                    <DialogHeader className='sr-only'>
+                      <DialogTitle>Create Organization</DialogTitle>
+                    </DialogHeader>
+                    <CreateOrganization />
+                  </DialogContent>
+                </Dialog>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
